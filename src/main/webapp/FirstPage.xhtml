@@ -1,45 +1,57 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:h="http://xmlns.jcp.org/jsf/html"
-	  xmlns:f="http://java.sun.com/jsf/core"
-	  xmlns:p="http://primefaces.org/ui">
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>First Page</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<h:outputStylesheet name="styles.css"/>
+	<title>MeetApp</title>
 </h:head>
 <h:body>
-	<h1>Register Events</h1>
-	<h:form>
-		<h:panelGrid columns="2">
-			<p:outputLabel value="Name of Event" />
-			<p:inputText value="#{eventMBean.event.name}"/>
 
-			<p:outputLabel value="Name of Organization" />
-			<p:inputText value="#{eventMBean.event.organization}"/>
+	<div id="header" class="center">
+		<h:graphicImage id="logo" library="images" name="meetapp.png" class="center"></h:graphicImage>
+	</div>
+	<div class="formulario center">
+		<h:form id="form">
+			<h:panelGrid>
+				<p:outputLabel value="Name of Event" />
+				<p:inputText value="#{eventMBean.event.name}" />
 
-			<p:outputLabel value="Locate" />
-			<p:inputText value="#{eventMBean.event.locale}"/>
+				<p:outputLabel value="Name of Organization" />
+				<p:inputText value="#{eventMBean.event.organization}" />
 
-			<p:outputLabel value="Date" />
-			<p:inputText value="#{eventMBean.event.date}"/>
+				<p:outputLabel value="Locate" />
+				<p:inputText value="#{eventMBean.event.locale}" />
 
-			<p:outputLabel value="Hours" />
-			<p:inputText value="#{eventMBean.event.timetable}"/>
+				<p:outputLabel value="Date" />
+				<p:inputText value="#{eventMBean.event.date}" type="date" />
 
-			<p:commandButton value="Register" action="#{eventMBean.addEvent}"/>
-		</h:panelGrid>
-	</h:form>
+				<p:outputLabel value="Hours" />
+				<p:inputText value="#{eventMBean.event.timetable}" type="time"/>
 
+				<h:panelGroup styleClass="center">
+					<p:commandButton id="btn-enviar" value="Register"
+						action="#{eventMBean.addEvent}" update="form table" />
+				</h:panelGroup>
+
+			</h:panelGrid>
+		</h:form>
+	</div>
 	<h1>Lista de Eventos</h1>
-	
-	<p:dataTable value="#{eventMBean.events}" var="e" border="1">
-		<p:column headerText="Name">#{e.name}</p:column>
-		<p:column headerText="Organization">#{e.organization}</p:column>
-		<p:column headerText="Locale">#{e.locale}</p:column>
-		<p:column headerText="Date">#{e.date}</p:column>
-		<p:column headerText="Timetable">#{e.timetable}</p:column>
-	</p:dataTable>
+
+	<h:panelGroup styleClass="center">
+		<p:dataTable value="#{eventMBean.events}" var="e" border="1"
+			id="table">
+			<p:column headerText="Name">#{e.name}</p:column>
+			<p:column headerText="Organization">#{e.organization}</p:column>
+			<p:column headerText="Locale">#{e.locale}</p:column>
+			<p:column headerText="Date">#{e.date}</p:column>
+			<p:column headerText="Timetable">#{e.timetable}</p:column>
+		</p:dataTable>
+	</h:panelGroup>
 
 </h:body>
 </html>
